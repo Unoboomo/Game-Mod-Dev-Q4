@@ -68,6 +68,7 @@ public :
 protected:
 	void					SpawnImpactEntities(const trace_t& collision, const idVec3 projectileDirection);
 
+	void					SpawnMidflightEntities(const idVec3 origin, const idVec3 direction, const idVec3 velocity);
 
 	idEntityPtr<idEntity>	owner;
 
@@ -109,6 +110,12 @@ protected:
 	int						ieMinPitch;
 	int						ieMaxPitch;
 	float					ieSlicePercentage;
+
+	//Initializes variables for midflight projectiles
+
+	idStr					midflightEntity;
+	int						launchDelay;
+	int						airTime;
 
 // RAVEN BEGIN
 // ddynerman: hit count for stats

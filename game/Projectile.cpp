@@ -390,6 +390,11 @@ void idProjectile::Launch( const idVec3 &start, const idVec3 &dir, const idVec3 
 	projectileFlags.randomShaderSpin	= spawnArgs.GetBool( "random_shader_spin" );
 	projectileFlags.detonate_on_bounce  = spawnArgs.GetBool( "detonate_on_bounce" );
 
+	//spawn midflight projectile information
+	midflightEntity = spawnArgs.GetString("def_midflightEntity", "");
+	launchDelay = spawnArgs.GetInt("time_between_launches", "60");
+	airTime = spawnArgs.GetInt("airtime", "0");
+
 	lightStartTime = 0;
 	lightEndTime = 0;
 
@@ -584,8 +589,40 @@ void idProjectile::Think( void ) {
 			lightDefHandle = gameRenderWorld->AddLightDef( &renderLight );
 		}
 	}
-}
 
+	// Very badly handles the creation of midflight projectiles
+	airTime++;
+	if (airTime % launchDelay == 0 && midflightEntity.Length() != 0) {
+		idVec3 vel, origin, dir;
+		vel = dir = physicsObj.GetLinearVelocity();
+		origin = physicsObj.GetOrigin();
+		dir.Normalize();
+		SpawnMidflightEntities(origin, dir, vel);
+	}
+
+}
+/*
+=================
+idProjectile::SpawnMidflightEntities
+=================
+*/
+void idProjectile::SpawnMidflightEntities(const idVec3 origin, const idVec3 direction, const idVec3 velocity)
+{
+
+	const idDict* midflightEntityDict = gameLocal.FindEntityDefDict(midflightEntity);
+	if (midflightEntityDict == NULL)
+		return;
+
+	idProjectile* spawnProjectile = NULL;
+	gameLocal.SpawnEntityDef(*midflightEntityDict, (idEntity**)&spawnProjectile);
+	if (spawnProjectile != NULL)
+	{
+		spawnProjectile->SetOwner(owner);
+
+		// Send it
+		spawnProjectile->Launch(origin, direction, velocity);
+	}
+}
 /*
 =================
 idProjectile::UpdateVisualAngles
