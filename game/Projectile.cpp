@@ -395,6 +395,9 @@ void idProjectile::Launch( const idVec3 &start, const idVec3 &dir, const idVec3 
 	launchDelay = spawnArgs.GetInt("time_between_launches", "60");
 	airTime = spawnArgs.GetInt("airtime", "0");
 
+	//rotate visual model?
+	rotateVisMod = spawnArgs.GetString("rotate", "N");
+
 	lightStartTime = 0;
 	lightEndTime = 0;
 
@@ -490,7 +493,17 @@ void idProjectile::Launch( const idVec3 &start, const idVec3 &dir, const idVec3 
 		renderEntity.shaderParms[SHADERPARM_DIVERSITY] = f;
 	}
 
- 	UpdateVisuals();
+		UpdateVisualAngles();
+	// rotate VisModel
+
+	
+	if (rotateVisMod == "Y") {
+		idVec3 vel = physicsObj.GetLinearVelocity();
+		idVec3 zVectorSavior;
+		zVectorSavior.Set(0.0f, 0.0f, 1.0f);
+		rotation.Init(gameLocal.GetTime(), gameLocal.GetMSec(), rotation.GetCurrentValue(gameLocal.GetTime()), zVectorSavior.Cross(vel).ToNormal().ToMat3().ToQuat());
+	}
+	
 
 	// Make sure these come after update visuals so the origin and axis are correct
 	PlayEffect( "fx_launch", renderEntity.origin, renderEntity.axis );
@@ -563,8 +576,10 @@ void idProjectile::Think( void ) {
 				flyEffect->Attenuate( speed / flyEffectAttenuateSpeed );
 			}
 		}
-
-		UpdateVisualAngles();
+		//if rotate VisModel, dont update angles
+		if (rotateVisMod != "Y") {
+			UpdateVisualAngles();
+		}
 	}
 		
 	Present();

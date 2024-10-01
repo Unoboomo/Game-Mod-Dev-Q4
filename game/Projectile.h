@@ -111,6 +111,9 @@ protected:
 	int						ieMaxPitch;
 	float					ieSlicePercentage;
 
+	//rotate visual model?
+	idStr					rotateVisMod;
+
 	//Initializes variables for midflight projectiles
 
 	idStr					midflightEntity;
