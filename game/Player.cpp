@@ -205,6 +205,7 @@ void idInventory::Clear( void ) {
 	powerups			= 0;
 	armor				= 0;
 	maxarmor			= 0;
+	monkeyMoney			= 0;
 	secretAreasDiscovered = 0;
 
 	memset( ammo, 0, sizeof( ammo ) );
@@ -316,6 +317,9 @@ void idInventory::GetPersistantData( idDict &dict ) {
 		sprintf( key, "levelTrigger_Trigger_%i", i );
 		dict.Set( key, levelTriggers[i].triggerName );
 	}
+
+	// monkey money
+	dict.SetInt("monkeymoney", monkeyMoney);
 }
 
 /*
@@ -339,6 +343,7 @@ void idInventory::RestoreInventory( idPlayer *owner, const idDict &dict ) {
 	maxHealth		= dict.GetInt( "maxhealth", "100" );
 	armor			= dict.GetInt( "armor", "50" );
 	maxarmor		= dict.GetInt( "maxarmor", "100" );
+	monkeyMoney		= dict.GetInt( "monkeymoney", "650");
 
 	// ammo
 	for( i = 0; i < MAX_AMMOTYPES; i++ ) {
@@ -404,6 +409,7 @@ void idInventory::Save( idSaveGame *savefile ) const {
 	savefile->WriteInt( powerups );
 	savefile->WriteInt( armor );
 	savefile->WriteInt( maxarmor );
+	savefile->WriteInt( monkeyMoney );
 
 	for( i = 0; i < MAX_AMMO; i++ ) {
 		savefile->WriteInt( ammo[ i ] );
@@ -484,6 +490,7 @@ void idInventory::Restore( idRestoreGame *savefile ) {
 	savefile->ReadInt( powerups );
 	savefile->ReadInt( armor );
 	savefile->ReadInt( maxarmor );
+	savefile->ReadInt(monkeyMoney);
 
 	for( i = 0; i < MAX_AMMO; i++ ) {
 		savefile->ReadInt( ammo[ i ] );
@@ -3408,6 +3415,14 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->HandleNamedEvent ( "updateArmor" );
 	}
 	
+	//Set hud money
+	temp = _hud->State().GetInt("player_money", "-1");
+	if (temp != inventory.monkeyMoney) {
+		_hud->SetStateInt("player_moneyDelta", temp == -1 ? 0 : (temp - inventory.monkeyMoney));
+		_hud->SetStateInt("player_money", inventory.monkeyMoney);
+		_hud->HandleNamedEvent("updateMoney");
+	}
+
 	// Boss bar
 	if ( _hud->State().GetInt ( "boss_health", "-1" ) != (bossEnemy ? bossEnemy->health : -1) ) {
 		if ( !bossEnemy || bossEnemy->health <= 0 ) {
@@ -4116,6 +4131,13 @@ bool idPlayer::Give( const char *statname, const char *value, bool dropped ) {
 			 inventory.armor = boundaryArmor;
 		}
 		nextArmorPulse = gameLocal.time + ARMOR_PULSE;
+	}
+	// Give Monkey Money
+	else if (!idStr::Icmp(statname, "money")) {
+		amount = atoi(value);
+		if (amount) {
+			inventory.monkeyMoney += amount;
+		}
 	} else if ( !idStr::Icmp( statname, "air" ) ) {
 		if ( airTics >= pm_airTics.GetInteger() ) {
 			return false;

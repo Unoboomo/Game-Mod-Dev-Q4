@@ -217,6 +217,10 @@ public:
 
  	int						lastGiveTime;
  	
+
+	//Bloons Var Start
+	int						monkeyMoney;
+
 	idList<idDict *>		items;
 	idStrList				pdas;
 	idStrList				pdaSecurity;
