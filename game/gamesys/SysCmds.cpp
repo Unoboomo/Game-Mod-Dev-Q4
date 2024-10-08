@@ -476,6 +476,15 @@ void GiveStuffToPlayer( idPlayer* player, const char* name, const char* value )
 			return;
 		}
 	}
+
+	//give monkey money
+	if (give_all || idStr::Icmp(name, "money") == 0) {
+		player->inventory.monkeyMoney += 99999;
+		if (!give_all) {
+			return;
+		}
+	}
+
 // RAVEN BEGIN
 	if (idStr::Icmp(name, "quad") == 0) {
 		player->GivePowerUp( POWERUP_QUADDAMAGE, SEC2MS( 30.0f ) );
