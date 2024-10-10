@@ -722,7 +722,7 @@ entityDef player_marine
 
 	// stats
 	"health"						"100"
-	"maxhealth"						"100"
+	"maxhealth"						"150"
 	"armor"							"0"
 	"maxarmor"						"100"
 	"monkeymoney"					"650"
