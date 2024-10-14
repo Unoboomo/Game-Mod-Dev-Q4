@@ -2588,7 +2588,7 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 	if ( ammoClip == 0 && AmmoAvailable() == 0 ) {
 		viewModel->PostGUIEvent ( "weapon_noammo" );
 	}
-	
+
 	// The attack is either a hitscan or a launched projectile, do that now.
 	if ( !gameLocal.isClient ) {
 		idDict& dict = altAttack ? attackAltDict : attackDict;
@@ -2749,6 +2749,8 @@ void rvWeapon::Hitscan( const idDict& dict, const idVec3& muzzleOrigin, const id
 	idBitMsg	msg;
 	byte		msgBuf[ MAX_GAME_MESSAGE_SIZE ];
 
+	const char* value;
+
 	// Let the AI know about the new attack
 	if ( !gameLocal.isMultiplayer ) {
 		aiManager.ReactToPlayerAttack( owner, muzzleOrigin, muzzleAxis[0] );
@@ -2820,7 +2822,9 @@ void rvWeapon::Hitscan( const idDict& dict, const idVec3& muzzleOrigin, const id
 		}
 		dir.Normalize();
 
-		gameLocal.HitScan( dict, muzzleOrigin, dir, fxOrigin, owner, false, 1.0f, NULL, areas );
+		value = weaponDef->dict.GetString("ent_to_spawn", NULL );
+
+		gameLocal.HitScan( dict, muzzleOrigin, dir, fxOrigin, owner, false, 1.0f, NULL, areas, value );
 
 		if ( gameLocal.isServer ) {
 			msg.WriteDir( dir, 24 );

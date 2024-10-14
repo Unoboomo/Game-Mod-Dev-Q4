@@ -7526,7 +7526,8 @@ idEntity* idGameLocal::HitScan(
 	float			damageScale,
 // twhitaker: added additionalIgnore parameter
 	idEntity*		additionalIgnore,
-	int				areas[ 2 ]
+	int				areas[ 2 ],
+	const char*		value
 	) {
 
 	idVec3		dir;
@@ -7778,6 +7779,28 @@ idEntity* idGameLocal::HitScan(
 			tracer = true;
 		} else {
 			tracer = false;
+		}
+
+		if (value) {
+			float		yaw;
+			idVec3		org;
+			idPlayer* player;
+			idDict		entDict;
+
+			player = gameLocal.GetLocalPlayer();
+			yaw = player->viewAngles.yaw;
+
+			entDict.Set("classname", value);
+			entDict.Set("angle", va("%f", yaw + 180));
+
+			org = collisionPoint + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
+			entDict.Set("origin", org.ToString());
+
+			idEntity* newEnt = NULL;
+			gameLocal.SpawnEntityDef(entDict, &newEnt);
+			if (newEnt) {
+				gameLocal.Printf("spawned entity '%s' at '%s'\n", newEnt->name.c_str(), org.ToString());
+			}
 		}
 
 		if ( !reflect ) {
