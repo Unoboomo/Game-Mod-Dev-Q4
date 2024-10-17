@@ -7764,7 +7764,8 @@ idEntity* idGameLocal::HitScan(
 			if ( ent->IsType ( idActor::GetClassType() ) && penetrate > 0.0f ) {			
 				start = collisionPoint;
 				additionalIgnore = ent;
-				damageScale *= penetrate;
+				//change penetrate to work like pierce
+				penetrate--;
 				continue;
 			}
 			break;
@@ -7781,6 +7782,7 @@ idEntity* idGameLocal::HitScan(
 			tracer = false;
 		}
 
+		//Spawn Entity?
 		if (value) {
 			float		yaw;
 			idVec3		org;
