@@ -127,7 +127,7 @@ entityDef weapon_machinegun
 	"foreshorten"				".6"
 
 	// Spawning entities
-	"ent_to_spawn"				"monster_berserker"
+	"ent_to_spawn"				"char_dart_monkey"
 
 	// ---------------------------- Muzzleflash ---------------------------------------
 
