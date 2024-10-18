@@ -7679,6 +7679,9 @@ idEntity* idGameLocal::HitScan(
 				reflect++;
 			}
 
+			if (hitscanDict.GetBool("upgrades", "0") && ent->isTower) {
+				ent->LevelUp();
+			}
 			// If the hit entity is bound to an actor use the actor instead
 			if ( ent->fl.takedamage && ent->GetTeamMaster( ) && ent->GetTeamMaster( )->IsType ( idActor::GetClassType() ) ) {
 				actualHitEnt = ent;

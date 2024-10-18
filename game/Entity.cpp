@@ -642,6 +642,10 @@ void idEntity::Spawn( void ) {
 	}
 
 	health = spawnArgs.GetInt( "health" );
+	
+	//probably shouldnt give every entity a tower level, but f it
+	tower_level = spawnArgs.GetInt("tower_level");
+	isTower = spawnArgs.GetBool("is_tower");
 
 	InitDefaultPhysics( origin, axis );
 
@@ -3612,6 +3616,23 @@ void idEntity::DamageFeedback( idEntity *victim, idEntity *inflictor, int &damag
 	// implemented in subclasses
 }
 
+/*
+================
+idEntity::LevelUp
+
+only applies to towers, levels up
+================
+*/
+void idEntity::LevelUp( void ) {
+	idPlayer* p = gameLocal.GetLocalPlayer();
+	int cost = spawnArgs.GetInt("upgrade_cost");
+	if (p->inventory.monkeyMoney < (cost)) {
+		return;
+	}
+	p->inventory.monkeyMoney -= cost;
+	tower_level++;
+	gameLocal.Printf("'%s' upgraded to level %d\n", name.c_str(), tower_level);
+}
 /*
 ============
 Damage

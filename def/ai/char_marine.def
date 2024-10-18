@@ -2697,9 +2697,11 @@ entityDef char_tower_base
 	"editor_ignore"								"1"
 	"noDamage"									"1"
 	"npc_name"									"#str_107522"
+	"npc_description"							"#str_107560"
 	"team"										"1"
 	"is_tower"									"1"
 	"tower_level"								"1"
+	"upgrade_cost"								"0"
 
 	// -------------------------------- Movement ------------------------------------
 	"directionalMovement"						"0"
@@ -2736,7 +2738,8 @@ entityDef char_dart_monkey
 	"hidesurface3"					"models/weapons/mp_guns/w_hb"
 	"hidesurface4"					"models/weapons/mp_guns/w_hb_battery"
 	
-	"npc_name"									"#str_107523"
+	"npc_name"						"#str_107523"
+	"upgrade_cost"					"20"
 
 	"fireRate"						".1"
 

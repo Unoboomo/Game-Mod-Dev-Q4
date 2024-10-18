@@ -136,6 +136,9 @@ public:
 
 	int						health;					// FIXME: do all objects really need health?
 
+	int tower_level;										// Tower Level shenanigans, this is garbage code
+	bool isTower;
+
 // RAVEN BEGIN
 // ddynerman: optional pre-prediction
 	int						predictTime;
@@ -521,6 +524,9 @@ public:
 // twhitaker: guided projectiles
 	virtual void			GuidedProjectileIncoming( idGuidedProjectile * projectile ) { }
 // RAVEN END
+
+// Level Up for towers
+	void					LevelUp(void);
 
 protected:
 	renderEntity_t			renderEntity;						// used to present a model to the renderer
