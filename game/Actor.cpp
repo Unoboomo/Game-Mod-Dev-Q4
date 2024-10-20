@@ -2399,6 +2399,14 @@ void idActor::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &dir
 	int	damage = damageDef->GetInt( "damage" ) * damageScale;
 	damage = GetDamageForLocation( damage, location );
 
+	//Level up functionality - damage
+	if (attacker->isTower) {
+		int level = attacker->tower_level;
+		if (level > 2) {
+			damage += ((level - 1) / 2);
+		}
+	}
+
 	// friendly fire damage
 	bool noDmgFeedback = false;
 	if ( attacker->IsType ( idActor::Type ) && static_cast<idActor*>(attacker)->team == team ) {

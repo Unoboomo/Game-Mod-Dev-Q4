@@ -2521,7 +2521,6 @@ entityDef char_marine
 	"hidesurface4"					"models/weapons/mp_guns/w_hb_battery"
 	
 	"fireRate"						".1"
-
 	// --------------------------------- Combat ------------------------------------
 	"def_attack_base"				"hitscan_marine_bullet"
 	"attack_base_hitscan"			"1"
@@ -2681,6 +2680,16 @@ entityDef char_marine_hyperblaster
 	// --------------------------------- Effects ---------------------------------
 	"fx_base_flash"								"effects/weapons/hyperblaster/muzzleflash_world.fx"
 }
+entityDef dummy
+{
+	"inherit"						"char_marine"
+	
+	//test
+	"health"									"4"
+	"passive"									"1"
+	"directionalMovement"						"0"
+	"team"										"0"
+}
 
 /*
 ===============================================================================
@@ -2702,9 +2711,11 @@ entityDef char_tower_base
 	"is_tower"									"1"
 	"tower_level"								"1"
 	"upgrade_cost"								"0"
+	"forceEnemy"								"1"
 
 	// -------------------------------- Movement ------------------------------------
 	"directionalMovement"						"0"
+	"attackRange"								"0 1000"
 
 	// -------------------------------- Actions ------------------------------------
 	"actionTimer_rangedAttack_rate"				"0"
@@ -2774,7 +2785,7 @@ entityDef hitscan_dart
 {
 	"inherit"									"hitscan_bullet_base"
 
-	"def_damage"								"damage_marine_bullet"
+	"def_damage"								"damage_dart"
 //	"use_hit_chance"							"1"
 
 	"attack_spread_horizontal"					"0"

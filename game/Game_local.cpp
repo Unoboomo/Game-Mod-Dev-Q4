@@ -7549,6 +7549,14 @@ idEntity* idGameLocal::HitScan(
 	ignore    = owner;
 	penetrate = hitscanDict.GetFloat( "penetrate" );
 
+	//Level up functionality - penetrate
+	if (owner->isTower) {
+		int level = owner->tower_level;
+		if (level > 1) {
+			penetrate += (level - 1);
+		}
+	}
+
 	if( hitscanDict.GetBool( "hitscanTint" ) && owner->IsType( idPlayer::GetClassType() ) ) {
 		hitscanTint = ((idPlayer*)owner)->GetHitscanTint();
 	}

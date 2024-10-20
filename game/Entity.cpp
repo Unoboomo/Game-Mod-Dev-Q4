@@ -3627,6 +3627,7 @@ void idEntity::LevelUp( void ) {
 	idPlayer* p = gameLocal.GetLocalPlayer();
 	int cost = spawnArgs.GetInt("upgrade_cost");
 	if (p->inventory.monkeyMoney < (cost)) {
+		gameLocal.Printf("Not enough money to upgrade '%s' to level %d\n", name.c_str(), tower_level + 1);
 		return;
 	}
 	p->inventory.monkeyMoney -= cost;
