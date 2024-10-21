@@ -3358,12 +3358,15 @@ idPlayer::UpdateHudAmmo
 void idPlayer::UpdateHudAmmo( idUserInterface *_hud ) {
 	int inclip;
 	int ammoamount;
+	const char* spawnEnt;
+	const idDeclEntityDef* spawnEntDef;
 
 	assert( weapon );
 	assert( _hud );
 
 	inclip		= weapon->AmmoInClip();
 	ammoamount	= weapon->AmmoAvailable();
+	spawnEnt = weapon->spawnArgs.GetString("ent_to_spawn", NULL);
 
 	if ( ammoamount < 0 ) {
 		// show infinite ammo
@@ -3385,6 +3388,16 @@ void idPlayer::UpdateHudAmmo( idUserInterface *_hud ) {
 		_hud->SetStateInt ( "player_totalammo", ammoamount );
 		_hud->SetStateInt ( "player_ammo", -1 );
 	} 
+
+	if (spawnEnt) {
+		spawnEntDef = gameLocal.FindEntityDef(spawnEnt, false);
+		if (spawnEntDef) {
+			_hud->SetStateString("tower_cost", va("$%d", spawnEntDef->dict.GetInt("purchase_price")));
+		}
+	}
+	else {
+		_hud->SetStateString("tower_cost", "");
+	}
 
 	_hud->SetStateBool( "player_ammo_empty", ( ammoamount == 0 ) );
 }

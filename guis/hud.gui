@@ -650,6 +650,17 @@ windowDef Desktop
 			background	"gui::ammoicon"
 			matcolor	0.658,0.639,0.376,0.6
 		}
+		windowDef tower_cost
+		{
+			rect	44,429,49,26
+			visible	1
+			forecolor	0.862,0.917,0.760,1
+			text	"gui::tower_cost"
+			textscale	0.5
+			font	"fonts/chain"
+			shear	0,-.22
+			textalign	2
+		}
 	}
 	windowDef p_health
 	{

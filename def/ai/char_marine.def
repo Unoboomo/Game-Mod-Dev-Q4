@@ -2750,6 +2750,8 @@ entityDef char_dart_monkey
 	"hidesurface4"					"models/weapons/mp_guns/w_hb_battery"
 	
 	"npc_name"						"#str_107523"
+	"purchase_price"				"170"
+
 	"upgrade_cost"					"20"
 
 	"fireRate"						".1"
