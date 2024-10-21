@@ -2749,7 +2749,7 @@ void rvWeapon::Hitscan( const idDict& dict, const idVec3& muzzleOrigin, const id
 	idBitMsg	msg;
 	byte		msgBuf[ MAX_GAME_MESSAGE_SIZE ];
 
-	const char* value;
+	const char* spawnEnt;
 
 	// Let the AI know about the new attack
 	if ( !gameLocal.isMultiplayer ) {
@@ -2822,9 +2822,9 @@ void rvWeapon::Hitscan( const idDict& dict, const idVec3& muzzleOrigin, const id
 		}
 		dir.Normalize();
 
-		value = weaponDef->dict.GetString("ent_to_spawn", NULL );
+		spawnEnt = weaponDef->dict.GetString("ent_to_spawn", NULL );
 
-		gameLocal.HitScan( dict, muzzleOrigin, dir, fxOrigin, owner, false, 1.0f, NULL, areas, value );
+		gameLocal.HitScan( dict, muzzleOrigin, dir, fxOrigin, owner, false, 1.0f, NULL, areas, spawnEnt);
 
 		if ( gameLocal.isServer ) {
 			msg.WriteDir( dir, 24 );

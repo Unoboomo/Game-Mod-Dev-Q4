@@ -7527,7 +7527,7 @@ idEntity* idGameLocal::HitScan(
 // twhitaker: added additionalIgnore parameter
 	idEntity*		additionalIgnore,
 	int				areas[ 2 ],
-	const char*		value
+	const char* spawnEnt
 	) {
 
 	idVec3		dir;
@@ -7794,26 +7794,39 @@ idEntity* idGameLocal::HitScan(
 		}
 
 		//Spawn Entity?
-		if (value) {
-			float		yaw;
-			idVec3		org;
+		if (spawnEnt) {
 			idPlayer* player;
-			idDict		entDict;
+			const idDeclEntityDef* spawnEntDef;
+			int purchasePrice;
 
 			player = gameLocal.GetLocalPlayer();
-			yaw = player->viewAngles.yaw;
+			spawnEntDef = gameLocal.FindEntityDef(spawnEnt, false);
+			purchasePrice = spawnEntDef->dict.GetInt("purchase_price");
+			if (player->inventory.monkeyMoney >= purchasePrice) {
+				float		yaw;
+				idVec3		org;
+				idDict		entDict;
 
-			entDict.Set("classname", value);
-			entDict.Set("angle", va("%f", yaw + 180));
+				player->inventory.monkeyMoney -= purchasePrice;
 
-			org = collisionPoint + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
-			entDict.Set("origin", org.ToString());
+				yaw = player->viewAngles.yaw;
 
-			idEntity* newEnt = NULL;
-			gameLocal.SpawnEntityDef(entDict, &newEnt);
-			if (newEnt) {
-				gameLocal.Printf("spawned entity '%s' at '%s'\n", newEnt->name.c_str(), org.ToString());
+				entDict.Set("classname", spawnEnt);
+				entDict.Set("angle", va("%f", yaw + 180));
+
+				org = collisionPoint + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
+				entDict.Set("origin", org.ToString());
+
+				idEntity* newEnt = NULL;
+				gameLocal.SpawnEntityDef(entDict, &newEnt);
+				if (newEnt) {
+					gameLocal.Printf("spawned entity '%s' at '%s'\n", newEnt->name.c_str(), org.ToString());
+				}
 			}
+			else {
+				gameLocal.Printf("Not enough money to spawn '%s'\n", spawnEnt);
+			}
+
 		}
 
 		if ( !reflect ) {
