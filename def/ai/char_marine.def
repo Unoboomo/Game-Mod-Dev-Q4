@@ -2254,7 +2254,7 @@ entityDef hitscan_marine_bullet_cortez
 entityDef melee_marine
 {
 	"inherit"					"melee_monster_base"
-	"damage"					"150"
+	"damage"					"1"
 	"knockback"					"40"
 	"snd_hit"					"gunner_punch"
 
@@ -2685,12 +2685,24 @@ entityDef dummy
 	"inherit"						"char_marine"
 	
 	//test
+	"health"									"150"
+	"passive"									"1"
+	"directionalMovement"						"0"
+	"team"										"1"
+	"noDamage"									"1"
+
+}
+
+entityDef dummy0
+{
+	"inherit"						"char_marine"
+	
+	//test
 	"health"									"4"
 	"passive"									"1"
 	"directionalMovement"						"0"
 	"team"										"0"
 }
-
 /*
 ===============================================================================
 
@@ -2705,8 +2717,8 @@ entityDef char_tower_base
 	"inherit1"									"char_marine_base"
 	"editor_ignore"								"1"
 	"noDamage"									"1"
+	"notarget"									"1"
 	"npc_name"									"#str_107522"
-	"npc_description"							"#str_107560"
 	"team"										"1"
 	"is_tower"									"1"
 	"tower_level"								"1"
@@ -2741,26 +2753,27 @@ entityDef char_tower_base
 
 entityDef char_dart_monkey
 {
-	"inherit"						"char_tower_base"
-	"editor_ignore"					"0"
+	"inherit"									"char_tower_base"
+	"editor_ignore"								"0"
 
-	"hidesurface1"					"models/weapons/mp_guns/w_sg"
-	"hidesurface2"					"models/weapons/mp_guns/w_sg_mod_ammo"
-	"hidesurface3"					"models/weapons/mp_guns/w_hb"
-	"hidesurface4"					"models/weapons/mp_guns/w_hb_battery"
+	"hidesurface1"								"models/weapons/mp_guns/w_sg"
+	"hidesurface2"								"models/weapons/mp_guns/w_sg_mod_ammo"
+	"hidesurface3"								"models/weapons/mp_guns/w_hb"
+	"hidesurface4"								"models/weapons/mp_guns/w_hb_battery"
 	
-	"npc_name"						"#str_107523"
-	"purchase_price"				"170"
+	"npc_name"									"#str_107523"
+	"npc_description"							"#str_107560"
+	
+	"purchase_price"							"170"
+	"upgrade_cost"								"20"
 
-	"upgrade_cost"					"20"
-
-	"fireRate"						".1"
+	"fireRate"									".1"
 
 	// --------------------------------- Combat ------------------------------------
-	"def_attack_base"				"hitscan_dart"
-	"attack_base_hitscan"			"1"
-	"attack_base_accuracy"			"1"
-	"attack_base_spread"			"0"
+	"def_attack_base"							"hitscan_dart"
+	"attack_base_hitscan"						"1"
+	"attack_base_accuracy"						"1"
+	"attack_base_spread"						"0"
 	
 	// --------------------------------- Sounds ---------------------------------
 	"snd_base_flash"				"npc_machinegun_fire"
@@ -2772,6 +2785,125 @@ entityDef char_dart_monkey
 	"fx_gut_hit"					"effects/levels/hub/marine_gut_hit.fx"
 	"fx_smear"						"effects/monsters/failed_transfer/smear.fx"
 }
+
+entityDef char_shotty_monkey
+{
+	"inherit"									"char_tower_base"
+	"editor_ignore"								"0"
+
+	"npc_name"									"#str_107524"
+	"npc_description"							"#str_107560"
+
+	"purchase_price"							"170"
+	"upgrade_cost"								"20"
+
+
+	// --------------------------------- General ----------------------------------
+	"hidesurface1"								"models/weapons/mp_guns/w_mg_lo"
+	"hidesurface2"								"models/weapons/mp_guns/w_sg_mod_ammo"
+	"hidesurface3"								"models/weapons/mp_guns/w_hb"
+	"hidesurface4"								"models/weapons/mp_guns/w_hb_battery"
+
+	"joint_flashlight"							"SG_muzzle_flash"
+	"directionalMovement"						"1"
+
+	// --------------------------------- Actions ----------------------------------
+	"action_rangedAttack_maxRange"				"350"
+	"action_leanLeftAttack_maxRange"			"350"
+	"action_leanRightAttack_maxRange"			"350"
+
+	// --------------------------------- Combat ----------------------------------
+	"weaponPrefix"								"shotgun"
+	"holdRange"									"0 300"	
+	"attackRange"								"0 300"
+
+	"def_attack_base"							"hitscan_dart"
+	"attack_base_hitscan"						"1"
+	"attack_base_spread"						"10"
+	"attack_base_count"							"10"
+	"attack_base_accuracy"						"1"
+
+	"fireRate"									".3"
+	"tactical_rush"								"1"
+
+	// --------------------------------- Sounds ---------------------------------
+	"snd_base_flash"							"npc_shotgun_fire"
+	
+	// --------------------------------- Effects ---------------------------------
+	"fx_base_flash"								"effects/weapons/shotgun/muzzleflash_world.fx"
+	"snd_gun"									"npc_shotgun_fire"
+}
+
+entityDef char_magic_monkey
+{
+	"inherit"									"char_tower_base"
+	"editor_ignore"								"0"
+
+	"npc_name"									"#str_107525"
+	"npc_description"							"#str_107560"
+
+	"purchase_price"							"170"
+	"upgrade_cost"								"20"
+
+	// --------------------------------- General ----------------------------------
+	"hidesurface1"								"models/weapons/mp_guns/w_mg_lo"
+	"hidesurface2"								"models/weapons/mp_guns/w_sg_mod_ammo"
+	"hidesurface3"								"models/weapons/mp_guns/w_sg"
+
+	"joint_flashlight"							"HB_muzzle_flash"
+
+	// --------------------------------- Combat ----------------------------------
+
+
+	"def_attack_base"							"projectile_magic_blast"
+	"attack_base_accuracy"						"1"
+
+
+
+	"fireRate"									".08"
+
+	// --------------------------------- Sounds ---------------------------------
+	"snd_base_flash"							"npc_hyperblaster_fire"
+
+	// --------------------------------- Effects ---------------------------------
+	"fx_base_flash"								"effects/weapons/hyperblaster/muzzleflash_world.fx"
+}
+
+entityDef char_rocket_monkey
+{
+	"inherit"									"char_tower_base"
+	"editor_ignore"								"0"
+
+	"npc_name"									"#str_107526"
+	"npc_description"							"#str_107560"
+
+	"purchase_price"							"170"
+	"upgrade_cost"								"20"
+
+	// --------------------------------- General ----------------------------------
+	"hidesurface1"								"models/weapons/mp_guns/w_mg_lo"
+	"hidesurface2"								"models/weapons/mp_guns/w_sg_mod_ammo"
+	"hidesurface3"								"models/weapons/mp_guns/w_sg"
+
+	"joint_flashlight"							"HB_muzzle_flash"
+
+	// --------------------------------- Combat ----------------------------------
+
+
+	"def_attack_base"							"projectile_monkey_rocket"
+	"attack_base_accuracy"						"1"
+
+
+
+	"fireRate"									".5"
+
+	// --------------------------------- Sounds ---------------------------------
+	"snd_base_flash"							"npc_hyperblaster_fire"
+
+	// --------------------------------- Effects ---------------------------------
+	"fx_base_flash"								"effects/weapons/hyperblaster/muzzleflash_world.fx"
+}
+//Damage Defs
 
 entityDef damage_dart
 {
@@ -2793,3 +2925,120 @@ entityDef hitscan_dart
 	"attack_spread_horizontal"					"0"
 	"attack_spread_vertical"					"0"
 }
+entityDef damage_magic_blast
+{
+	"inherit"											"damage_blaster"
+	"damage"											"5"
+
+	"deathPush"											"100"
+	"deathPushMin"										"3000 350"
+	"deathPushMax"										"5000 500"
+}
+
+entityDef projectile_magic_blast
+{
+	"inherit"											"projectile_blaster_base"
+
+	"def_damage"										"damage_marine_hyperblaster"
+
+	"speed"												"1800"
+	"orient_towards_motion"								"1"
+
+	"fx_impact"											"effects/weapons/hyperblaster/impact_default.fx"
+	"fx_fly"											"effects/weapons/hyperblaster/fly.fx"
+	"fx_trail"											""
+}
+entityDef damage_monkey_rocket_direct
+{
+	"damage"							"4"
+	"push"								"200"
+	"mtr_splat"							""
+	"gib"								"1"
+}
+
+entityDef damage_monkey_rocket_splash
+{
+	"damage"							"2"
+	"radius"							"20"
+	"knockback"							"200"
+	"push"								"200"
+	"gib"								"1"
+}
+
+entityDef projectile_monkey_rocket
+{
+	"inherit"					"projectile_rocket"
+	"spawnclass"				"idGuidedProjectile"
+
+	"model"						"models/monsters/heavyhovertank/rocket.lwo"
+	"scale"						"4"
+	"size"						"48 48 48"
+	"clipmask_rendermodel"		"0"
+	"no_contents"				"0"
+
+
+	"delaySpeed"				"325"
+	"speed"						"600"
+	"speed_end"					"850"
+	"speed_duration"			"3"
+	"fuse"						"20"
+
+	"def_damage"				"damage_monkey_rocket_direct"
+	"def_splash_damage"			"damage_monkey_rocket_splash"
+
+	"fx_fly"					"effects/monsters/harvester/rocket_trail.fx"
+	"fx_impact"					"effects/monsters/harvester/rocket_explosion.fx"
+	"fx_impact_rock"				"effects/monsters/harvester/rocket_explosion.fx"
+	"fx_impact_concrete"				"effects/monsters/harvester/rocket_explosion.fx"
+	"fx_detonate"					"effects/monsters/harvester/rocket_explosion.fx"
+	"fx_fuse"					"effects/monsters/harvester/rocket_explosion.fx"
+}
+/*
+===============================================================================
+
+	Bloons Start
+
+===============================================================================
+*/
+
+entityDef char_bloon_base
+{
+	"inherit2"									"ai_tactical"
+	"inherit1"									"char_marine_base"
+	"editor_ignore"								"1"
+	"npc_name"									"#str_107522"
+	"npc_description"							"#str_107560"
+	"team"										"0"
+	"is_bloon"									"1"
+	"health"									"10"
+	// -------------------------------- Movement ------------------------------------
+	"directionalMovement"						"1"
+	"attackRange"								"0 1000"
+	"neverDormant"								"1"
+	"enemy"										"dummy_1"
+	// -------------------------------- Actions ------------------------------------
+	"actionTimer_rangedAttack_rate"				"0"
+	"action_rangedAttack_rate"					""
+	"action_rangedAttack_failRate"				"0"
+
+	"action_elbowAttack"						"1"
+	"action_meleeAttack"						"1"
+	"action_killswitchAttack"					"0"
+	"action_rangedAttack"						"0"
+	"def_attack_meleeElbow"						"melee_marine"
+	"def_attack_meleeRifleButt"					"melee_marine"
+
+	// --------------------------------- Combat ----------------------------------
+	"ammo"										"-1"
+	"minShots"									"1"	
+	"maxShots"									"1"
+
+	"tactical_Ranged"							"0"
+	"tactical_rush"								"1"
+	"tactical_cover"							"0"
+	"tactical_hide"								"0"
+
+	"def_attack_base"				"hitscan_marine_bullet"
+	"attack_base_hitscan"			"1"
+	"attack_base_accuracy"			"1"
+	"attack_base_spread"			".25"

@@ -485,6 +485,11 @@
 
 	"#str_107522"	"Tower"
 	"#str_107523"	"Dart Monkey"
+	"#str_107524"	"Shotty Monkey"
+	"#str_107525"	"Magic Monkey"
+	"#str_107526"	"Rocket Monkey"
+
+
 
 	//tower costs
 	"#str_107560"	"Upgrade Cost: $20"

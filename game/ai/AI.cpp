@@ -1753,6 +1753,13 @@ void idAI::Killed( idEntity *inflictor, idEntity *attacker, int damage, const id
 		}
 		kv = spawnArgs.MatchPrefix( "def_drops", kv );
 	}
+		if (name.Icmp("dummy_1") == 0) {
+		idPlayer* player = gameLocal.GetLocalPlayer();
+		if (!player) {
+			return;
+		}
+		player->Kill(false, false);
+	}
 }
 
 /***********************************************************************
