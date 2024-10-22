@@ -2254,7 +2254,7 @@ entityDef hitscan_marine_bullet_cortez
 entityDef melee_marine
 {
 	"inherit"					"melee_monster_base"
-	"damage"					"1"
+	"damage"					"150"
 	"knockback"					"40"
 	"snd_hit"					"gunner_punch"
 
@@ -2689,7 +2689,7 @@ entityDef dummy
 	"passive"									"1"
 	"directionalMovement"						"0"
 	"team"										"1"
-	"noDamage"									"1"
+	"noDamage"									"0"
 
 }
 
@@ -2794,7 +2794,7 @@ entityDef char_shotty_monkey
 	"npc_name"									"#str_107524"
 	"npc_description"							"#str_107560"
 
-	"purchase_price"							"170"
+	"purchase_price"							"150"
 	"upgrade_cost"								"20"
 
 
@@ -2842,7 +2842,7 @@ entityDef char_magic_monkey
 	"npc_name"									"#str_107525"
 	"npc_description"							"#str_107560"
 
-	"purchase_price"							"170"
+	"purchase_price"							"180"
 	"upgrade_cost"								"20"
 
 	// --------------------------------- General ----------------------------------
@@ -2877,7 +2877,7 @@ entityDef char_rocket_monkey
 	"npc_name"									"#str_107526"
 	"npc_description"							"#str_107560"
 
-	"purchase_price"							"170"
+	"purchase_price"							"200"
 	"upgrade_cost"								"20"
 
 	// --------------------------------- General ----------------------------------
@@ -2896,6 +2896,41 @@ entityDef char_rocket_monkey
 
 
 	"fireRate"									".5"
+
+	// --------------------------------- Sounds ---------------------------------
+	"snd_base_flash"							"npc_hyperblaster_fire"
+
+	// --------------------------------- Effects ---------------------------------
+	"fx_base_flash"								"effects/weapons/hyperblaster/muzzleflash_world.fx"
+}
+
+entityDef char_tack_shooter
+{
+	"inherit"									"char_tower_base"
+	"editor_ignore"								"0"
+
+	"npc_name"									"#str_107527"
+	"npc_description"							"#str_107560"
+
+	"purchase_price"							"130"
+	"upgrade_cost"								"20"
+
+	// --------------------------------- General ----------------------------------
+	"hidesurface1"								"models/weapons/mp_guns/w_mg_lo"
+	"hidesurface2"								"models/weapons/mp_guns/w_sg_mod_ammo"
+	"hidesurface3"								"models/weapons/mp_guns/w_sg"
+
+	"joint_flashlight"							"HB_muzzle_flash"
+
+	// --------------------------------- Combat ----------------------------------
+
+
+	"def_attack_base"							"projectile_monkey_tack"
+	"attack_base_accuracy"						"1"
+
+
+
+	"fireRate"									".75"
 
 	// --------------------------------- Sounds ---------------------------------
 	"snd_base_flash"							"npc_hyperblaster_fire"
@@ -2950,9 +2985,8 @@ entityDef projectile_magic_blast
 }
 entityDef damage_monkey_rocket_direct
 {
-	"damage"							"4"
+	"damage"							"2"
 	"push"								"200"
-	"mtr_splat"							""
 	"gib"								"1"
 }
 
@@ -2986,11 +3020,53 @@ entityDef projectile_monkey_rocket
 	"def_damage"				"damage_monkey_rocket_direct"
 	"def_splash_damage"			"damage_monkey_rocket_splash"
 
-	"fx_fly"					"effects/monsters/harvester/rocket_trail.fx"
-	"fx_impact"					"effects/monsters/harvester/rocket_explosion.fx"
-	"fx_impact_rock"				"effects/monsters/harvester/rocket_explosion.fx"
-	"fx_impact_concrete"				"effects/monsters/harvester/rocket_explosion.fx"
-	"fx_detonate"					"effects/monsters/harvester/rocket_explosion.fx"
+	"fx_fly"				"effects/weapons/rocketlauncher/fly.fx"
+	"fx_impact"				"effects/weapons/rocketlauncher/impact.fx"
+	"fx_impact_rock"			"effects/weapons/rocketlauncher/impact_concrete.fx"
+	"fx_impact_concrete"			"effects/weapons/rocketlauncher/impact_concrete.fx"
+	"fx_detonate"				"effects/weapons/rocketlauncher/detonate.fx"
+	"fx_fuse"					"effects/monsters/harvester/rocket_explosion.fx"
+}
+
+entityDef damage_monkey_tack_direct
+{
+	"damage"							"2"
+	"push"								"200"
+	"gib"								"1"
+}
+
+entityDef damage_monkey_tack_splash
+{
+	"damage"							"2"
+	"radius"							"20"
+	"knockback"							"200"
+	"push"								"200"
+	"gib"								"1"
+}
+
+entityDef projectile_monkey_tack
+{
+	"inherit"					"projectile_rocket"
+	"spawnclass"				"idProjectile"
+
+	"model"						"models/weapons/nailgun/nail.ase"
+	"scale"						"4"
+	"size"						"48 48 48"
+	"clipmask_rendermodel"		"0"
+	"no_contents"				"0"
+
+
+	"speed"						"1"
+	"fuse"						".25"
+
+	"def_damage"				"damage_monkey_tack_direct"
+	"def_splash_damage"			"damage_monkey_tack_splash"
+
+	"fx_fly"			"effects/weapons/nailgun/fly.fx"
+	"fx_impact"			"effects/weapons/nailgun/impact_default.fx"
+	"fx_impact_rock"		"effects/weapons/nailgun/impact_concrete.fx"
+	"fx_impact_concrete"		"effects/weapons/nailgun/impact_concrete.fx"
+	"fx_detonate"				"effects/weapons/rocketlauncher/detonate.fx"
 	"fx_fuse"					"effects/monsters/harvester/rocket_explosion.fx"
 }
 /*

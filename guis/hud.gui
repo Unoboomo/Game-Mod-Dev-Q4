@@ -652,7 +652,7 @@ windowDef Desktop
 		}
 		windowDef tower_cost
 		{
-			rect	44,429,49,26
+			rect	27,429,66,26
 			visible	1
 			forecolor	0.862,0.917,0.760,1
 			text	"gui::tower_cost"
