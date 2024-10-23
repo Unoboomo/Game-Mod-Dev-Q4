@@ -2838,6 +2838,7 @@ entityDef char_magic_monkey
 {
 	"inherit"									"char_tower_base"
 	"editor_ignore"								"0"
+	"guided_upgradable"							"1"
 
 	"npc_name"									"#str_107525"
 	"npc_description"							"#str_107560"
@@ -2873,6 +2874,7 @@ entityDef char_rocket_monkey
 {
 	"inherit"									"char_tower_base"
 	"editor_ignore"								"0"
+	"guided_upgradable"							"1"
 
 	"npc_name"									"#str_107526"
 	"npc_description"							"#str_107560"
@@ -2963,7 +2965,7 @@ entityDef hitscan_dart
 entityDef damage_magic_blast
 {
 	"inherit"											"damage_blaster"
-	"damage"											"5"
+	"damage"											"2"
 
 	"deathPush"											"100"
 	"deathPushMin"										"3000 350"
@@ -2973,8 +2975,9 @@ entityDef damage_magic_blast
 entityDef projectile_magic_blast
 {
 	"inherit"											"projectile_blaster_base"
+	"spawnclass"										"idProjectile"
 
-	"def_damage"										"damage_marine_hyperblaster"
+	"def_damage"										"damage_magic_blast"
 
 	"speed"												"1800"
 	"orient_towards_motion"								"1"
@@ -2983,6 +2986,13 @@ entityDef projectile_magic_blast
 	"fx_fly"											"effects/weapons/hyperblaster/fly.fx"
 	"fx_trail"											""
 }
+
+entityDef guided_projectile_magic_blast
+{
+	"inherit"											"projectile_magic_blast"
+	"spawnclass"										"idGuidedProjectile"
+}
+
 entityDef damage_monkey_rocket_direct
 {
 	"damage"							"2"
@@ -3002,7 +3012,7 @@ entityDef damage_monkey_rocket_splash
 entityDef projectile_monkey_rocket
 {
 	"inherit"					"projectile_rocket"
-	"spawnclass"				"idGuidedProjectile"
+	"spawnclass"				"idProjectile"
 
 	"model"						"models/monsters/heavyhovertank/rocket.lwo"
 	"scale"						"4"
@@ -3028,6 +3038,11 @@ entityDef projectile_monkey_rocket
 	"fx_fuse"					"effects/monsters/harvester/rocket_explosion.fx"
 }
 
+entityDef guided_projectile_monkey_rocket
+{
+	"inherit"											"projectile_monkey_rocket"
+	"spawnclass"										"idGuidedProjectile"
+}
 entityDef damage_monkey_tack_direct
 {
 	"damage"							"2"

@@ -7363,7 +7363,12 @@ void idPlayer::UpdateFocusCharacter( idEntity* newEnt ) {
 		return;
 	}
 	// Handle character interaction
-	cursor->SetStateString( "npc", common->GetLocalizedString(newEnt->spawnArgs.GetString( "npc_name", "Joe" )) );
+	if (newEnt->name.Icmp("dummy_1") == 0) {
+		cursor->SetStateString("npc", va("%d HP", newEnt->health));
+	}
+	else {
+		cursor->SetStateString("npc", common->GetLocalizedString(newEnt->spawnArgs.GetString("npc_name", "Joe")));
+	}
 	cursor->SetStateString( "npcdesc", common->GetLocalizedString(newEnt->spawnArgs.GetString( "npc_description", "" )) );
 	if ( newEnt->IsType( rvAIMedic::GetClassType() ) ) {
 		if ( ((rvAIMedic*)newEnt)->isTech ) {

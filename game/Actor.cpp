@@ -2399,7 +2399,7 @@ void idActor::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &dir
 	int	damage = damageDef->GetInt( "damage" ) * damageScale;
 	damage = GetDamageForLocation( damage, location );
 
-	//Level up functionality - damage
+	//Level up functionality - damage, works for all towers
 	if (attacker->isTower) {
 		int level = attacker->tower_level;
 		if (level > 2) {

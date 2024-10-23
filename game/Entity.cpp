@@ -3632,6 +3632,13 @@ void idEntity::LevelUp( void ) {
 	}
 	p->inventory.monkeyMoney -= cost;
 	tower_level++;
+	
+	//Level up functionality - guided projectile, works for magic and rocket
+	if (tower_level == 5 && spawnArgs.GetBool("guided_upgradable")) {
+		const char* attackName = spawnArgs.GetString("def_attack_base", false);
+
+		spawnArgs.Set("def_attack_base", va("guided_%s", attackName));
+	}
 	gameLocal.Printf("'%s' upgraded to level %d\n", name.c_str(), tower_level);
 }
 /*

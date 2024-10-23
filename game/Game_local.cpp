@@ -5697,6 +5697,15 @@ void idGameLocal::RadiusDamage( const idVec3 &origin, idEntity *inflictor, idEnt
 
 	damageDef->GetInt( "damage", "20", damage );
 	damageDef->GetInt( "radius", "50", radius );
+
+	//Level up functionality - increased radius damage, works for rocket monkey and tack shooter
+	if (attacker->isTower) {
+		int level = attacker->tower_level;
+		if (level > 1) {
+			radius *= (level - 1);
+		}
+	}
+
 	damageDef->GetInt( "push", va( "%d", damage * 100 ), push );
 	damageDef->GetFloat( "attackerDamageScale", "0.5", attackerDamageScale );
 	if( gameLocal.isMultiplayer ) {
@@ -7549,7 +7558,7 @@ idEntity* idGameLocal::HitScan(
 	ignore    = owner;
 	penetrate = hitscanDict.GetFloat( "penetrate" );
 
-	//Level up functionality - penetrate
+	//Level up functionality - penetrate, works for dart and shotty
 	if (owner->isTower) {
 		int level = owner->tower_level;
 		if (level > 1) {
