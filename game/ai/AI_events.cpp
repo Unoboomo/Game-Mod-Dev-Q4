@@ -1080,7 +1080,6 @@ void idAI::Event_AttackMelee( const char* meleeName ) {
 	AttackMelee ( meleeName, meleeDict ); 
 
 	if (enemy.ent->health < before_health && this->spawnArgs.GetBool("is_bloon", NULL)) {
-		gameLocal.Printf("willDamage\n");
 		this->Damage(gameLocal.world, gameLocal.world, idVec3(0, 0, 1), "damage_moverCrush", 1000, INVALID_JOINT);
 	}
 }

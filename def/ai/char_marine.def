@@ -2685,7 +2685,7 @@ entityDef dummy
 	"inherit"						"char_marine"
 	
 	//test
-	"health"									"1500"
+	"health"									"150"
 	"passive"									"1"
 	"directionalMovement"						"0"
 	"team"										"1"
@@ -2767,7 +2767,7 @@ entityDef char_dart_monkey
 	"purchase_price"							"170"
 	"upgrade_cost"								"20"
 
-	"fireRate"									".1"
+	"fireRate"									".05"
 
 	// --------------------------------- Combat ------------------------------------
 	"def_attack_base"							"hitscan_dart"
@@ -2950,6 +2950,7 @@ entityDef damage_dart
 	"deathPush"									"100"
 	"deathPushMin"								"3000 350"
 	"deathPushMax"								"5000 500"
+	"damageType"								"sharpness"
 }
 
 entityDef hitscan_dart
@@ -2970,6 +2971,7 @@ entityDef damage_magic_blast
 	"deathPush"											"100"
 	"deathPushMin"										"3000 350"
 	"deathPushMax"										"5000 500"
+	"damageType"										"energy"
 }
 
 entityDef projectile_magic_blast
@@ -2998,6 +3000,7 @@ entityDef damage_monkey_rocket_direct
 	"damage"							"2"
 	"push"								"200"
 	"gib"								"1"
+	"damageType"						"explosion"
 }
 
 entityDef damage_monkey_rocket_splash
@@ -3007,6 +3010,7 @@ entityDef damage_monkey_rocket_splash
 	"knockback"							"200"
 	"push"								"200"
 	"gib"								"1"
+	"damageType"						"explosion"
 }
 
 entityDef projectile_monkey_rocket
@@ -3048,6 +3052,7 @@ entityDef damage_monkey_tack_direct
 	"damage"							"2"
 	"push"								"200"
 	"gib"								"1"
+	"damageType"						"energy"
 }
 
 entityDef damage_monkey_tack_splash
@@ -3057,6 +3062,7 @@ entityDef damage_monkey_tack_splash
 	"knockback"							"200"
 	"push"								"200"
 	"gib"								"1"
+	"damageType"						"energy"
 }
 
 entityDef projectile_monkey_tack
@@ -3197,6 +3203,7 @@ entityDef char_black_bloon
 	"child_1"									"char_yellow_bloon"
 	"child_2"									"char_yellow_bloon"
 	"rbe"										"9"
+	"immunity"									"explosion"
 }
 
 
@@ -3207,6 +3214,7 @@ entityDef char_white_bloon
 	"health"									"8"
 	"fly_speed"									"100"
 	"rbe"										"8"
+	"immunity"									"sharpness"
 }
 
 entityDef char_purple_bloon
@@ -3218,6 +3226,7 @@ entityDef char_purple_bloon
 	"child_1"									"char_white_bloon"
 	"child_2"									"char_white_bloon"
 	"rbe"										"17"
+	"immunity"									"energy"
 }
 
 entityDef char_lead_bloon
@@ -3229,6 +3238,7 @@ entityDef char_lead_bloon
 	"child_1"									"char_black_bloon"
 	"child_2"									"char_black_bloon"
 	"rbe"										"19"
+	"immunity"									"sharpness"
 }
 
 entityDef char_camo_bloon
@@ -3240,6 +3250,8 @@ entityDef char_camo_bloon
 	"child_1"									"char_lead_bloon"
 	"child_2"									"char_purple_bloon"
 	"rbe"										"37"
+	"immunity"									"sharpness"
+	"immunity2"									"explosion"
 }
 
 entityDef char_moab
@@ -3254,6 +3266,7 @@ entityDef char_moab
 	"child_4"									"char_camo_bloon"
 	"rbe"										"248"
 }
+
 //Bloon damage
 
 entityDef melee_bloon

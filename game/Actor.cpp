@@ -2405,11 +2405,31 @@ void idActor::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &dir
 		if (level > 2) {
 			damage += ((level - 1) / 2);
 		}
-		//if tower, dont damage dummy
+	}
+	
+	//handles immunities
+	const char* damageType = damageDef->GetString("damageType", NULL);
+	if (isBloon && damageType) {
+		const idKeyValue* kv2 = this->spawnArgs.MatchPrefix("immunity", NULL);
+		const char* immunity;
+		while (kv2) {
+			immunity = kv2->GetValue();
+			if (immunity) {
+				if (idStr::Icmp(immunity, damageType) == 0) {
+					damage = 0;
+				}
+			}
+			kv2 = spawnArgs.MatchPrefix("immunity", kv2);
+		}
+	}
+
+	//if tower, dont damage dummy
+	if (attacker->isTower) {
 		if (name.Icmp("dummy_1") == 0) {
 			return;
 		}
 	}
+
 	// deal damage = to rbe
 	if (attacker->isBloon) {
 		damage = attacker->spawnArgs.GetInt("rbe");

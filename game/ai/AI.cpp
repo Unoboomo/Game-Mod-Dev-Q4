@@ -1768,8 +1768,6 @@ void idAI::Killed( idEntity *inflictor, idEntity *attacker, int damage, const id
 
 	//spawns children
 	if (isBloon && attacker->isTower) {
-		gameLocal.Printf("in Children Spawn\n");
-
 		const idKeyValue* kv2 = spawnArgs.MatchPrefix("child_", NULL);
 		idPlayer* player;
 		float		yaw;
