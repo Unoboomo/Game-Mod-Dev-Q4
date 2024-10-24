@@ -86,7 +86,7 @@ entityDef weapon_blaster
 
 //	"def_projectile"			"projectile_blaster"
 	"def_hitscan"				"hitscan_blaster"
-	"def_altprojectile"			"projectile_blaster_charged"
+	"def_althitscan"			"hitscan_blaster_charged"
 	"ammoType"					"ammo_blaster"
 	"clipSize"					"0"
 	"ammoRequired"				"0"
@@ -250,6 +250,16 @@ entityDef hitscan_blaster
 	"push"						"7500"
 
 	"impact_gib"				"1"
+}
+entityDef hitscan_blaster_charged
+{
+	"inherit"					"hitscan_blaster"
+
+	"def_damage"				"damage_blaster_charged"
+	
+	//allows the blaster to upgrade towers en mass
+	"upgrades"					"1"
+	"times_to_upgrade"			"20"
 }
 
 entityDef projectile_blaster

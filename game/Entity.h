@@ -527,7 +527,7 @@ public:
 // RAVEN END
 
 // Level Up for towers
-	void					LevelUp(void);
+	virtual bool					LevelUp(int timesToUpgrade = 1);
 
 protected:
 	renderEntity_t			renderEntity;						// used to present a model to the renderer

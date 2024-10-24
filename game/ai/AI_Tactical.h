@@ -126,6 +126,8 @@ private:
 
 	virtual void		Event_PostSpawn						( void );
 
+	virtual bool					LevelUp(int timesToUpgrade = 1);
+
 	CLASS_STATES_PROTOTYPE ( rvAITactical );
 };
 

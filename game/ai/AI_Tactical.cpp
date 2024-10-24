@@ -1052,3 +1052,18 @@ void rvAITactical::Event_PostSpawn( void ) {
 		}
 	}
 }
+
+/*
+================
+rvAITactical::LevelUp
+
+only applies to towers, levels up
+================
+*/
+bool rvAITactical::LevelUp(int timesToUpgrade) {
+	if (idEntity::LevelUp(timesToUpgrade)) {
+		fireRate *= idMath::Pow(0.95, timesToUpgrade);
+		return true;
+	}
+	return false;
+}

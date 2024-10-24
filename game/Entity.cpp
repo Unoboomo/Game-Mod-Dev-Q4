@@ -3624,23 +3624,25 @@ idEntity::LevelUp
 only applies to towers, levels up
 ================
 */
-void idEntity::LevelUp( void ) {
+bool idEntity::LevelUp(int timesToUpgrade) {
 	idPlayer* p = gameLocal.GetLocalPlayer();
-	int cost = spawnArgs.GetInt("upgrade_cost");
+	int cost = spawnArgs.GetInt("upgrade_cost") * timesToUpgrade;
 	if (p->inventory.monkeyMoney < (cost)) {
-		gameLocal.Printf("Not enough money to upgrade '%s' to level %d\n", name.c_str(), tower_level + 1);
-		return;
+		gameLocal.Printf("Not enough money to upgrade '%s' to level %d\n", name.c_str(), tower_level + 1 * timesToUpgrade);
+		return false;
 	}
 	p->inventory.monkeyMoney -= cost;
-	tower_level++;
+	tower_level += timesToUpgrade;
 	
 	//Level up functionality - guided projectile, works for magic and rocket
-	if (tower_level == 5 && spawnArgs.GetBool("guided_upgradable")) {
+	if (tower_level >= 5 && spawnArgs.GetBool("guided_upgradable") && !spawnArgs.GetBool("is_guided", "0")) {
 		const char* attackName = spawnArgs.GetString("def_attack_base", false);
-
 		spawnArgs.Set("def_attack_base", va("guided_%s", attackName));
+		spawnArgs.Set("is_guided", "1");
+		gameLocal.Printf("inGuided\n");
 	}
 	gameLocal.Printf("'%s' upgraded to level %d\n", name.c_str(), tower_level);
+	return true;
 }
 /*
 ============

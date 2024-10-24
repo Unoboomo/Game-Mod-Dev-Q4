@@ -7697,7 +7697,7 @@ idEntity* idGameLocal::HitScan(
 			}
 
 			if (hitscanDict.GetBool("upgrades", "0") && ent->isTower) {
-				ent->LevelUp();
+				ent->LevelUp(hitscanDict.GetInt("times_to_upgrade","1"));
 			}
 			// If the hit entity is bound to an actor use the actor instead
 			if ( ent->fl.takedamage && ent->GetTeamMaster( ) && ent->GetTeamMaster( )->IsType ( idActor::GetClassType() ) ) {
@@ -7828,9 +7828,6 @@ idEntity* idGameLocal::HitScan(
 
 				idEntity* newEnt = NULL;
 				gameLocal.SpawnEntityDef(entDict, &newEnt);
-				if (newEnt) {
-					gameLocal.Printf("spawned entity '%s' at '%s'\n", newEnt->name.c_str(), org.ToString());
-				}
 			}
 			else {
 				gameLocal.Printf("Not enough money to spawn '%s'\n", spawnEnt);
