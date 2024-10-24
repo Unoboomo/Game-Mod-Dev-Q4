@@ -2880,6 +2880,7 @@ void Cmd_StartRound_f(const idCmdArgs& args) {
 	const char* enemyArr[10] = { "char_red_bloon", "char_blue_bloon", "char_green_bloon", "char_yellow_bloon", "char_black_bloon", "char_white_bloon", "char_purple_bloon", "char_lead_bloon", "char_camo_bloon", "char_moab" };
 	int numEnemies;
 	int highestLevelEnemy;
+	int lowestLevelEnemy;
 
 	if (player->godmode) {
 	}
@@ -2907,33 +2908,40 @@ void Cmd_StartRound_f(const idCmdArgs& args) {
 		common->Printf("Starting Round %d\n",roundNum);
 		player->inventory.monkeyMoney += (roundNum * 100);
 
-		if (roundNum != finalRound) {
-			numEnemies = roundNum * 2;
+		//Calculate range of enemies to choose from from array
+		if (roundNum != finalRound && roundNum < 18) {
 			highestLevelEnemy = roundNum / 2;
-			if (highestLevelEnemy > 9) {
-				highestLevelEnemy = 9;
+			if (highestLevelEnemy > 4) {
+				lowestLevelEnemy = highestLevelEnemy - 4;
+			}
+			else {
+				lowestLevelEnemy = 0;
 			}
 		}
 		else {
-			numEnemies = roundNum / 18 + 1;
-			highestLevelEnemy = -1;
+			highestLevelEnemy = 9;
+			lowestLevelEnemy = 9;
+		}
+
+		//Calculate number of enemies to spawn in a round
+		if (highestLevelEnemy < 9) {
+			numEnemies = (highestLevelEnemy - lowestLevelEnemy + (roundNum % 2)) * 2;
+		}
+		else {
+			numEnemies = roundNum / 18 + roundNum % 18;
 		}
 
 		for (int i = numEnemies; i > 0; i--) {
 			const char* spawnEnt;
 			idDict		entDict;
 
-			if (highestLevelEnemy >= 0) {
-				spawnEnt = enemyArr[rvRandom::irand(0, highestLevelEnemy)];
-			}
-			else {
-				spawnEnt = enemyArr[9];
-			}
+
+			spawnEnt = enemyArr[rvRandom::irand(lowestLevelEnemy, highestLevelEnemy)];
 
 			entDict.Set("classname", spawnEnt);
 			entDict.Set("angle", va("%f", yaw + 180));
 
-			org = bloonSpawn->GetPhysics()->GetOrigin() + idVec3(-1, 0, 0) * 40 * i + idVec3(0, 0, 1);
+			org = bloonSpawn->GetPhysics()->GetOrigin() + idVec3(0 - (i % 5) , (-1)  * (1 + (i / 5)), 0) * 40 + idVec3(0, 0, 1);
 			entDict.Set("origin", org.ToString());
 
 			idEntity* newEnt = NULL;

@@ -804,21 +804,21 @@ windowDef Desktop
 			matcolor	0,0,0,0.5
 			shear	0,-.22
 		}
-		windowDef ammo_valbar1
+		windowDef rounds_valbar1
 		{
 			rect	462,420,125,59
 			visible	1
 			background	"gfx/guis/hud/valbar"
-			matcolor	0.701,0.815,0.431,0.2
+			matcolor	0.698,0.811,0.427,0.2
 			shear	0,-.22
 		}
-		windowDef ammo_amount
+		windowDef rounds_amount
 		{
-			rect	493,429,73,26
+			rect	478,438,88,24
 			visible	1
-			forecolor	0.854,0.909,0.752,1
+			forecolor	0.850,0.905,0.749,1
 			text	"gui::player_rounds"
-			textscale	0.3
+			textscale	0.25
 			font	"fonts/chain"
 			shear	0,-.22
 			textalign	2

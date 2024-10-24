@@ -809,7 +809,7 @@ entityDef player_marine
 	"def_playerView"					"playerView_marine"
 
 	//Bloon Variables
-	"final_round"						"5"
+	"final_round"						"21"
 }
 
 entityDef player_strogg

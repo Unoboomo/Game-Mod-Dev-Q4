@@ -1787,9 +1787,6 @@ void idAI::Killed( idEntity *inflictor, idEntity *attacker, int damage, const id
 
 			idEntity* newEnt = NULL;
 			gameLocal.SpawnEntityDef(entDict, &newEnt);
-			if (newEnt) {
-				gameLocal.Printf("spawned entity '%s' at '%s'\n", newEnt->name.c_str(), org.ToString());
-			}
 			child_num++;
 			kv2 = spawnArgs.MatchPrefix("child_", kv2);
 		}

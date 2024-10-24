@@ -2066,6 +2066,7 @@ void idPlayer::Spawn( void ) {
 	//initialize rounds
 	roundNum = 0;
 	finalRound = spawnArgs.GetInt("final_round","5");
+	fl.notarget = true;
 }
 
 /*
