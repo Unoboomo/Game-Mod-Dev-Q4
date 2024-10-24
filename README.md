@@ -14,7 +14,7 @@ The Game:
 Once you spawn in, you will see an character to the far right (Track_End) and one to the far left (Track_Start). The one to the right (Track_End) represents your health. When that character dies, you will die and need to restart. The character to the left (Track_Start) represents where bloons will spawn. 
 
 In your weapon wheel, you have an Upgrade Gun, and 5 different tower options:
--	Upgrade Gun: Shoot placed towers to upgrade them if the funds are available. (Tip – shoot from a distance where you can’t see the tower’s name)
+-	Upgrade Gun: Shoot placed towers to upgrade them if the funds are available. You can charge fire to upgrade a tower 20x if you have the funds (Tip – shoot from a distance where you can’t see the tower’s name)
 -	Dart Monkey: Just shoots the bloons. Upgrades increase pierce and damage infinitely. Damage Type is sharpness.
 -	Shotty Monkey: Follows Bloons around and shoots them with a shotgun. Upgrades increase pierce and damage infinitely. Damage type is sharpness.
 -	Magic Monkey: Shoots bloons with a fast moving projectile. Upgrades increase damage infinitely, at level 5 you unlock tracking projectiles. Damage type is energy.
