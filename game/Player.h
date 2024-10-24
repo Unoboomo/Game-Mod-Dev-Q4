@@ -402,6 +402,9 @@ public:
 	int						minRespawnTime;			// can respawn when time > this, force after g_forcerespawn
 	int						maxRespawnTime;			// force respawn after this time
 
+	//Round Numbers
+	int						roundNum;
+	int						finalRound;
 	// the first person view values are always calculated, even
 	// if a third person view is used
 	idVec3					firstPersonViewOrigin;

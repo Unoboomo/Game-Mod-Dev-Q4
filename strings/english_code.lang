@@ -416,17 +416,17 @@
 	
 	//weapons and goods
 	
-	"#str_107400"	"Blaster"
+	"#str_107400"	"Upgrade Gun"
 	"#str_107401"	"Dark Matter Gun"	
 	"#str_107402"	"Gauntlet"
 	"#str_107403"	"Grenade Launcher"	
-	"#str_107404"	"HyperBlaster"	
+	"#str_107404"	"Magic Monkey"	
 	"#str_107405"	"Lightning Gun"
-	"#str_107406"	"Machinegun"
+	"#str_107406"	"Dart Monkey"
 	"#str_107407"	"Nailgun"
-	"#str_107408"	"Railgun"
-	"#str_107409"	"Rocket Launcher"	
-	"#str_107410"	"Shotgun"
+	"#str_107408"	"Tack Shooter"
+	"#str_107409"	"Rocket Monkey"	
+	"#str_107410"	"Shotty Monkey"
 	"#str_107411"	"Clips"
 	"#str_107412"	"Nails"
 	"#str_107413"	"Slugs"
@@ -489,6 +489,10 @@
 	"#str_107525"	"Magic Monkey"
 	"#str_107526"	"Rocket Monkey"
 	"#str_107527"	"Tack Shooter"
+	
+	//Bloon Spawnpoint
+	"#str_107528"	"Bloon Spawnpoint"
+	"#str_107529"	"If He Dies, You Die"
 
 	//Bloon Data
 

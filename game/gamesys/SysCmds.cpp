@@ -2872,6 +2872,75 @@ void Cmd_TestId_f( const idCmdArgs &args ) {
 	gameLocal.mpGame.AddChatLine( common->GetLocalizedString( id ), "<nothing>", "<nothing>", "<nothing>" );	
 }
 
+void Cmd_StartRound_f(const idCmdArgs& args) {
+	idPlayer* player = gameLocal.GetLocalPlayer();
+	idEntity* bloonSpawn = gameLocal.FindEntity("bloon_spawnpoint_1");
+	int roundNum = player->roundNum;
+	int finalRound = player->finalRound;
+	const char* enemyArr[10] = { "char_red_bloon", "char_blue_bloon", "char_green_bloon", "char_yellow_bloon", "char_black_bloon", "char_white_bloon", "char_purple_bloon", "char_lead_bloon", "char_camo_bloon", "char_moab" };
+	int numEnemies;
+	int highestLevelEnemy;
+
+	if (player->godmode) {
+	}
+	else {
+		player->godmode = true;
+	}
+
+	if (player->fl.notarget) {
+	}
+	else {
+		player->fl.notarget = true;
+	}
+
+	if (roundNum >= finalRound) {
+		common->Printf("You Won! There are no more rounds\n");
+		return;
+	}
+	else {
+		float		yaw = player->viewAngles.yaw;
+		idVec3		org;
+		idVec3		spawnLoc = bloonSpawn->GetPhysics()->GetOrigin();
+
+		player->roundNum++;
+		roundNum = player->roundNum;
+		common->Printf("Starting Round %d\n",roundNum);
+		player->inventory.monkeyMoney += (roundNum * 100);
+
+		if (roundNum != finalRound) {
+			numEnemies = roundNum * 2;
+			highestLevelEnemy = roundNum / 2;
+			if (highestLevelEnemy > 9) {
+				highestLevelEnemy = 9;
+			}
+		}
+		else {
+			numEnemies = roundNum / 18 + 1;
+			highestLevelEnemy = -1;
+		}
+
+		for (int i = numEnemies; i > 0; i--) {
+			const char* spawnEnt;
+			idDict		entDict;
+
+			if (highestLevelEnemy >= 0) {
+				spawnEnt = enemyArr[rvRandom::irand(0, highestLevelEnemy)];
+			}
+			else {
+				spawnEnt = enemyArr[9];
+			}
+
+			entDict.Set("classname", spawnEnt);
+			entDict.Set("angle", va("%f", yaw + 180));
+
+			org = bloonSpawn->GetPhysics()->GetOrigin() + idVec3(-1, 0, 0) * 40 * i + idVec3(0, 0, 1);
+			entDict.Set("origin", org.ToString());
+
+			idEntity* newEnt = NULL;
+			gameLocal.SpawnEntityDef(entDict, &newEnt);
+		}
+	}
+}
 // RAVEN BEGIN
 // ddynerman: instance testing commands
 void Cmd_SetInstance_f( const idCmdArgs& args ) {
@@ -3241,6 +3310,9 @@ void idGameLocal::InitConsoleCommands( void ) {
 	cmdSystem->AddCommand( "buyMenu",				Cmd_ToggleBuyMenu_f,		CMD_FL_GAME,				"Toggle buy menu (if in a buy zone and the game type supports it)" );
 	cmdSystem->AddCommand( "buy",					Cmd_BuyItem_f,				CMD_FL_GAME,				"Buy an item (if in a buy zone and the game type supports it)" );
 // RITUAL END
+
+//StartRound Command
+	cmdSystem->AddCommand("startRound", Cmd_StartRound_f, CMD_FL_GAME | CMD_FL_CHEAT, "Starts Next Round, spawns bloons, etc.");
 
 }
 

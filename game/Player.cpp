@@ -2062,6 +2062,10 @@ void idPlayer::Spawn( void ) {
 //RITUAL END
 
 	itemCosts = static_cast< const idDeclEntityDef * >( declManager->FindType( DECL_ENTITYDEF, "ItemCostConstants", false ) );
+
+	//initialize rounds
+	roundNum = 0;
+	finalRound = spawnArgs.GetInt("final_round","5");
 }
 
 /*
@@ -3435,6 +3439,9 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->SetStateInt("player_money", inventory.monkeyMoney);
 		_hud->HandleNamedEvent("updateMoney");
 	}
+	
+	//Set Round Count
+	_hud->SetStateString("player_rounds", va("Round: %3d/%d", roundNum, finalRound));
 
 	// Boss bar
 	if ( _hud->State().GetInt ( "boss_health", "-1" ) != (bossEnemy ? bossEnemy->health : -1) ) {

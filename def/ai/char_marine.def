@@ -2691,6 +2691,7 @@ entityDef dummy
 	"team"										"1"
 	"noDamage"									"0"
 	"selfMeleeDamageScale"						"1"
+	"npc_description"							"#str_107529"
 }
 
 entityDef dummy0
@@ -3298,4 +3299,15 @@ entityDef melee_bloon
 	"deathPush"					"150"
 	"deathPushMin"				"3000 350"
 	"deathPushMax"				"5000 500"
+}
+
+//Bloon Spawnpoint
+entityDef bloon_spawnpoint
+{
+	"inherit"						"dummy"
+	
+	"npc_name"									"#str_107528"
+	"npc_description"							""
+	"notarget"									"1"
+	"noDamage"									"1"
 }

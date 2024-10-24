@@ -792,6 +792,38 @@ windowDef Desktop
 			matcolor	0.658,0.639,0.376,0.6
 		}
 	}
+	windowDef p_rounds
+	{
+		rect	0,0,640,480
+		visible	("gui::mp" == 0 )
+		windowDef rounds_backbar1
+		{
+			rect	462,420,125,59
+			visible	1
+			background	"gfx/guis/hud/backbar"
+			matcolor	0,0,0,0.5
+			shear	0,-.22
+		}
+		windowDef ammo_valbar1
+		{
+			rect	462,420,125,59
+			visible	1
+			background	"gfx/guis/hud/valbar"
+			matcolor	0.701,0.815,0.431,0.2
+			shear	0,-.22
+		}
+		windowDef ammo_amount
+		{
+			rect	493,429,73,26
+			visible	1
+			forecolor	0.854,0.909,0.752,1
+			text	"gui::player_rounds"
+			textscale	0.3
+			font	"fonts/chain"
+			shear	0,-.22
+			textalign	2
+		}
+	}
 	windowDef p_ammo_mp
 	{
 		rect	0,0,640,480
