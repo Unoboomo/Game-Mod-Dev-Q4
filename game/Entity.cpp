@@ -646,6 +646,7 @@ void idEntity::Spawn( void ) {
 	//probably shouldnt give every entity a tower level, but f it
 	tower_level = spawnArgs.GetInt("tower_level");
 	isTower = spawnArgs.GetBool("is_tower");
+	isBloon = spawnArgs.GetBool("is_bloon");
 
 	InitDefaultPhysics( origin, axis );
 

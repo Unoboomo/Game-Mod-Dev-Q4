@@ -490,9 +490,25 @@
 	"#str_107526"	"Rocket Monkey"
 	"#str_107527"	"Tack Shooter"
 
+	//Bloon Data
+
+	"#str_107530"	"Bloon"
+
+	"#str_107531"	"Red Bloon"
+	"#str_107532"	"Blue Bloon"
+	"#str_107533"	"Green Bloon"
+	"#str_107534"	"Yellow Bloon"
+	"#str_107535"	"Black Bloon"
+	"#str_107536"	"White Bloon"
+	"#str_107537"	"Purple Bloon"
+	"#str_107538"	"Lead Bloon"
+	"#str_107539"	"Camo Bloon"
+	"#str_107540"	"Moab"
+
 
 
 	//tower costs
+
 	"#str_107560"	"Upgrade Cost: $20"
 
 	// maps.def

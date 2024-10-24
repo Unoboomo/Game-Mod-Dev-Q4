@@ -7823,7 +7823,7 @@ idEntity* idGameLocal::HitScan(
 				entDict.Set("classname", spawnEnt);
 				entDict.Set("angle", va("%f", yaw + 180));
 
-				org = collisionPoint + idAngles(0, yaw, 0).ToForward() * 80 + idVec3(0, 0, 1);
+				org = collisionPoint + idAngles(0, yaw, 0).ToForward() + idVec3(0, 0, 1);
 				entDict.Set("origin", org.ToString());
 
 				idEntity* newEnt = NULL;

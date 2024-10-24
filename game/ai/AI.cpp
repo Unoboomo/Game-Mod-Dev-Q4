@@ -1613,7 +1613,11 @@ void idAI::Killed( idEntity *inflictor, idEntity *attacker, int damage, const id
 	idAngles			ang;
 	const char*			modelDeath;
 	const idKeyValue*	kv;
-	
+	idVec3 death_location;
+
+	//get death location for children
+	death_location = GetPhysics()->GetOrigin();
+
 	if ( g_debugDamage.GetBool() ) {
 		gameLocal.Printf( "Damage: joint: '%s', zone '%s'\n", animator.GetJointName( ( jointHandle_t )location ), 
 			GetDamageGroup( location ) );
@@ -1753,7 +1757,48 @@ void idAI::Killed( idEntity *inflictor, idEntity *attacker, int damage, const id
 		}
 		kv = spawnArgs.MatchPrefix( "def_drops", kv );
 	}
-		if (name.Icmp("dummy_1") == 0) {
+	//gives on pop cash
+	if (isBloon && attacker->isTower) {
+		idPlayer* player = gameLocal.GetLocalPlayer();
+		if (!player) {
+			return;
+		}
+		player->inventory.monkeyMoney += spawnArgs.GetInt("health");
+	}
+
+	//spawns children
+	if (isBloon && attacker->isTower) {
+		gameLocal.Printf("in Children Spawn\n");
+
+		const idKeyValue* kv2 = spawnArgs.MatchPrefix("child_", NULL);
+		idPlayer* player;
+		float		yaw;
+		int		child_num = 1;
+		player = gameLocal.GetLocalPlayer();
+		yaw = player->viewAngles.yaw;
+
+		while (kv2) {
+			idVec3		org;
+			idDict		entDict;
+
+			entDict.Set("classname", kv2->GetValue());
+			entDict.Set("angle", va("%f", yaw + 180));
+
+			org = death_location + idAngles(0, yaw + 90, 0).ToForward() * 80 * child_num + idVec3(0, 0, 1);
+			entDict.Set("origin", org.ToString());
+
+			idEntity* newEnt = NULL;
+			gameLocal.SpawnEntityDef(entDict, &newEnt);
+			if (newEnt) {
+				gameLocal.Printf("spawned entity '%s' at '%s'\n", newEnt->name.c_str(), org.ToString());
+			}
+			child_num++;
+			kv2 = spawnArgs.MatchPrefix("child_", kv2);
+		}
+	}
+
+	//kills player on dummy death
+	if (name.Icmp("dummy_1") == 0) {
 		idPlayer* player = gameLocal.GetLocalPlayer();
 		if (!player) {
 			return;

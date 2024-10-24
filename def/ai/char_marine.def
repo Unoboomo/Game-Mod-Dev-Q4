@@ -2685,12 +2685,12 @@ entityDef dummy
 	"inherit"						"char_marine"
 	
 	//test
-	"health"									"15"
+	"health"									"1500"
 	"passive"									"1"
 	"directionalMovement"						"0"
 	"team"										"1"
 	"noDamage"									"0"
-
+	"selfMeleeDamageScale"						"1"
 }
 
 entityDef dummy0
@@ -3110,7 +3110,7 @@ entityDef char_bloon_base
 	"neverDormant"								"1"
 	"enemy"										"dummy_1"
 	"flying"						"1"
-	"fly_speed"						"120"
+	"fly_speed"						"50"
 //	"fly_offset"					"64"
 //	"fly_offset"					"256"
 	"fly_offset"					"0"
@@ -3151,7 +3151,109 @@ entityDef char_bloon_base
 	"attack_base_accuracy"			"1"
 	"attack_base_spread"			".25"
 }
+entityDef char_red_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107531"
+	"health"									"1"
+	"fly_speed"									"50"
+	"rbe"										"1"
+}
 
+entityDef char_blue_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107532"
+	"health"									"2"
+	"fly_speed"									"70"
+	"rbe"										"2"
+}
+
+entityDef char_green_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107533"
+	"health"									"3"
+	"fly_speed"									"90"
+	"rbe"										"3"
+}
+
+
+entityDef char_yellow_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107534"
+	"health"									"4"
+	"fly_speed"									"160"
+	"rbe"										"4"
+}
+
+entityDef char_black_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107535"
+	"health"									"1"
+	"fly_speed"									"90"
+	"child_1"									"char_yellow_bloon"
+	"child_2"									"char_yellow_bloon"
+	"rbe"										"9"
+}
+
+
+entityDef char_white_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107536"
+	"health"									"8"
+	"fly_speed"									"100"
+	"rbe"										"8"
+}
+
+entityDef char_purple_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107537"
+	"health"									"1"
+	"fly_speed"									"150"
+	"child_1"									"char_white_bloon"
+	"child_2"									"char_white_bloon"
+	"rbe"										"17"
+}
+
+entityDef char_lead_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107538"
+	"health"									"1"
+	"fly_speed"									"50"
+	"child_1"									"char_black_bloon"
+	"child_2"									"char_black_bloon"
+	"rbe"										"19"
+}
+
+entityDef char_camo_bloon
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107539"
+	"health"									"1"
+	"fly_speed"									"90"
+	"child_1"									"char_lead_bloon"
+	"child_2"									"char_purple_bloon"
+	"rbe"										"37"
+}
+
+entityDef char_moab
+{
+	"inherit"									"char_bloon_base"
+	"npc_name"									"#str_107540"
+	"health"									"100"
+	"fly_speed"									"50"
+	"child_1"									"char_camo_bloon"
+	"child_2"									"char_camo_bloon"
+	"child_3"									"char_camo_bloon"
+	"child_4"									"char_camo_bloon"
+	"rbe"										"248"
+}
 //Bloon damage
 
 entityDef melee_bloon

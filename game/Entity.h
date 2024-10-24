@@ -138,6 +138,7 @@ public:
 
 	int tower_level;										// Tower Level shenanigans, this is garbage code
 	bool isTower;
+	bool isBloon;
 
 // RAVEN BEGIN
 // ddynerman: optional pre-prediction

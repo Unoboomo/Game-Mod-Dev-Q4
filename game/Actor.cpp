@@ -2405,6 +2405,14 @@ void idActor::Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &dir
 		if (level > 2) {
 			damage += ((level - 1) / 2);
 		}
+		//if tower, dont damage dummy
+		if (name.Icmp("dummy_1") == 0) {
+			return;
+		}
+	}
+	// deal damage = to rbe
+	if (attacker->isBloon) {
+		damage = attacker->spawnArgs.GetInt("rbe");
 	}
 
 	// friendly fire damage
